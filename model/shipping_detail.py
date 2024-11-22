@@ -7,4 +7,4 @@ class ShippingDetails(database.Model):
     tracking_number = database.Column(database.String(255))
     shipping_date = database.Column(database.TIMESTAMP)
     estimated_delivery_date = database.Column(database.TIMESTAMP)
-    status = database.Column(database.Enum("Pending", "Shipped", "In Transit", "Delivered"), default="Pending")
+    status = database.Column(database.Enum("PENDING", "SHIPPED", "IN TRANSIT", "DELIVERED"), default="PENDING")

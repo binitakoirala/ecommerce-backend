@@ -1,8 +1,8 @@
-"""Create product table.
+"""Create product table
 
-Revision ID: 01264c80ab95
-Revises: 
-Create Date: 2024-09-29 15:41:48.431972
+Revision ID: 237b67363223
+Revises: 91cc81ec6bfd
+Create Date: 2024-11-21 22:11:26.183115
 
 """
 
@@ -11,8 +11,8 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = "01264c80ab95"
-down_revision = None
+revision = "237b67363223"
+down_revision = "91cc81ec6bfd"
 branch_labels = None
 depends_on = None
 

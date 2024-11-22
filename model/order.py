@@ -9,7 +9,7 @@ class Orders(database.Model):
     email = database.Column(database.String(255))
     order_date = database.Column(database.TIMESTAMP)
     status = database.Column(
-        database.Enum("pending", "processing", "shipped", "delivered", "cancelled"), default="pending"
+        database.Enum("PENDING", "PROSESSING", "SHIPPED", "DELIVERED", "CANCELLED"), default="PENDING"
     )
     total_amount = database.Column(database.Float)
     shipping_address = database.Column(database.String(255), nullable=False)
