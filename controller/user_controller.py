@@ -58,9 +58,7 @@ class UserController:
         if not response:
             return {"message": "Unable to register user."}, 500
 
-        return {
-            "message": "User registration successful."
-        }, 201
+        return {"message": "User registration successful."}, 201
 
 
 # @user_bp.route("/", methods=["POST"])

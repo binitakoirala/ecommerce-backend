@@ -11,7 +11,6 @@ class User(database.Model):
     phone_number = database.Column(database.String(15))
     email = database.Column(database.String(255), nullable=False, unique=True)
     profile_picture = database.Column(database.String(500))
-    status = database.Column(database.Enum("active", "inactive", "banned", name="user_status_enum"), nullable=False)
     preferences = database.Column(database.JSON)
     created_at = database.Column(database.TIMESTAMP)
     updated_at = database.Column(database.TIMESTAMP)

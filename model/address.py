@@ -11,6 +11,6 @@ class Address(database.Model):
     country = database.Column(database.String(255), nullable=False)
     postal_code = database.Column(database.String(255), nullable=False)
     is_default = database.Column(database.Boolean, default=True)
-    address_type = database.Column(database.String(255), default="shipping", nullable=False)
+    address_type = database.Column(database.String(255), default="SHIPPING", nullable=False)
 
-    __table_args__ = (CheckConstraint("address_type IN ('shipping', 'billing')", name="ck_address_type"),)
+    __table_args__ = (CheckConstraint("address_type IN ('SHIPPING', 'BILLING')", name="ck_address_type"),)

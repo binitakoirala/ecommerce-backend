@@ -7,4 +7,4 @@ class LoyaltyPoints(database.Model):
     points = database.Column(database.Integer, nullable=False)
     created_at = database.Column(database.TIMESTAMP)
     reason = database.Column(database.String(255), nullable=False)
-    status = database.Column(database.Enum("Gain", "Loss"))
+    status = database.Column(database.Enum("GAIN", "LOSS"))

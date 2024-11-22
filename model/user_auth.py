@@ -11,7 +11,10 @@ class UserAuth(database.Model):
     email_verification_token = database.Column(database.String(255))
     hashed_password = database.Column(database.String(255), nullable=False)
     email = database.Column(database.String(50), nullable=False, unique=True)
-    role = database.Column(database.Enum("ADMIN", "USER", name="user_role_enum"), nullable=False)
+    role = database.Column(database.Enum("ADMIN", "USER", name="user_auth_role_enum"), nullable=False)
+    status = database.Column(
+        database.Enum("ACTIVE", "INACTIVE", "BANNED", name="user_auth_status_enum"), nullable=False
+    )
     last_logged_in = database.Column(database.TIMESTAMP)
     email_verified = database.Column(database.Boolean, nullable=False, default=False)
     phone_number_verified = database.Column(database.Boolean, nullable=False, default=False)
