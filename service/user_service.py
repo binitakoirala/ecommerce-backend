@@ -40,11 +40,29 @@ class UserService:
         database.session.commit()
 
         user_auth = UserAuth(
-            user_id=user.user_id, email=user.email, hashed_password=hashed_password, role="USER", status="ACTIVE"
+            user_id=user.user_id,
+            email=user.email,
+            hashed_password=hashed_password,
+            role="USER",
+            status="ACTIVE",
         )
 
         database.session.add(user_auth)
 
         database.session.commit()
 
+        return user
+
+    @classmethod
+    def delete_user_by_id(cls, id: int):
+        """A function to delete user by ID."""
+
+        user: User = User.query.get(id)
+        if user is None:
+            return None
+
+        user_auth: UserAuth = UserAuth.query.filter_by(user_id=id).first()
+        if user_auth:
+            user_auth.status = "INACTIVE"
+            database.session.commit()
         return user
