@@ -27,8 +27,8 @@ class UserService:
     def create_user(cls, user_detail: dict):
         """A function to create a user."""
 
-        password = user_detail["password"].encode('utf-8')
-        hashed_password  = bcrypt.hashpw(password, bcrypt.gensalt())
+        password = user_detail["password"].encode("utf-8")
+        hashed_password = bcrypt.hashpw(password, bcrypt.gensalt()).decode("utf-8")
 
         user = User(
             first_name=user_detail["first_name"],
@@ -66,3 +66,14 @@ class UserService:
             user_auth.status = "INACTIVE"
             database.session.commit()
         return user
+
+    @classmethod
+    def verify_user_password(cls, user_id: int, password: str):
+        user_auth: UserAuth = UserAuth.query.filter_by(user_id=user_id).first()
+        if user_auth is None:
+            return False
+
+        if bcrypt.checkpw(password.encode("utf-8"), user_auth.hashed_password):
+            return True
+        else:
+            return False
