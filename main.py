@@ -31,12 +31,10 @@ migrate.init_app(app, database)
 
 jwt = JWTManager(app)
 
-
 app.register_blueprint(product_bp)
 app.register_blueprint(category_bp)
 app.register_blueprint(user_bp)
 app.register_blueprint(user_auth_bp)
-
 
 @app.route("/")
 def hello_world():
