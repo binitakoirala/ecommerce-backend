@@ -16,5 +16,7 @@ jobs:
         run: pip install -r requirements-dev.txt
       - name: Install Dependencies
         run: pip install -r requirements.txt
+      - name: Code Format Check
+        run: black . --config pyproject.toml --diff
       - name: Run Tests With pytest
         run: pytest ./tests/unit -vvv
