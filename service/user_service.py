@@ -61,10 +61,11 @@ class UserService:
         if user is None:
             return None
 
-        user_auth: UserAuth = UserAuth.query.filter_by(user_id=id).first()
-        if user_auth:
-            user_auth.status = "INACTIVE"
-            database.session.commit()
+        UserAuth.query.filter_by(user_id=id).delete()
+        User.query.filter_by(user_id=id).delete()
+
+        database.session.commit()
+
         return user
 
     @classmethod

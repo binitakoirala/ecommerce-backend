@@ -36,6 +36,7 @@ app.register_blueprint(category_bp)
 app.register_blueprint(user_bp)
 app.register_blueprint(user_auth_bp)
 
+
 @app.route("/")
 def hello_world():
     return {"message": "Welcome to Ecommerce API!"}

@@ -1,7 +1,5 @@
 from flask import request
 
-from ..model import Category
-from ..database import database
 from ..service.user_service import UserService
 
 
@@ -48,13 +46,21 @@ class UserController:
 
     def add_user(self):
         user_request: dict = request.get_json()
-        print(user_request)
         response = self.user_service.create_user(user_detail=user_request)
 
         if not response:
             return {"message": "Unable to register user."}, 500
 
-        return {"message": "User registration successful."}, 201
+        return {
+            "user_id": response.user_id,
+            "first_name": response.first_name,
+            "last_name": response.last_name,
+            "dob": response.dob,
+            "gender": response.gender,
+            "address": response.address,
+            "phone_number": response.phone_number,
+            "email": response.email,
+        }, 201
 
     def delete_user(self, id: int):
         user = self.user_service.delete_user_by_id(id=id)
@@ -62,4 +68,4 @@ class UserController:
         if user is None:
             return {"message": "User not found."}, 404
 
-        return {"message": "User deleted successfully."}, 200
+        return {"message": "User deleted successfully."}, 204

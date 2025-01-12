@@ -39,3 +39,15 @@ python -m flask --app main --debug run
 ```bash
 black . --config pyproject.toml
 ```
+
+### Testing
+
+#### Unit Test
+```bash
+pytest ./tests/unit -vvv
+```
+
+#### API Test
+```bash
+pytest ./tests/api -vvv
+```
