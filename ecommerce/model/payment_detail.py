@@ -1,4 +1,4 @@
-from main import database
+from ecommerce.main import database
 
 
 class PaymentDetails(database.Model):

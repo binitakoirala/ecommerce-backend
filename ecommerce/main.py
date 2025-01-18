@@ -40,3 +40,6 @@ app.register_blueprint(user_auth_bp)
 @app.route("/")
 def hello_world():
     return {"message": "Welcome to Ecommerce API!"}
+
+if __name__ == "__main__":
+    app.run()
