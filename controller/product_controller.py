@@ -1,7 +1,5 @@
+from flask import request
 from ..model import Product
-
-# from flask import Blueprint, request, jsonify
-from ..database import database
 
 from ..service.product_service import ProductService
 
@@ -49,47 +47,32 @@ class ProductController:
             "color": product.color,
         }, 200
 
+    def add_product(self):
+        product = request.get_json()
 
-# @product_bp.route("/", methods=["POST"])
-# def add_product():
-#     product = request.get_json()
-#     if not product:
-#         return jsonify({
-#             "error": "No product provided."
-#         }), 400
+        if not product:
+            return {"message": "No product provided."}, 400
 
-#     new_product = Product(
-#         name= product.get("name"),
-#         description= product.get("description"),
-#         price= product.get("price"),
-#         stock_quantity= product.get("stock_quantity"),
-#         brand= product.get("brand"),
-#         weight= product.get("weight"),
-#         dimension= product.get("dimension"),
-#         color= product.get("color")
-#     )
+        try:
+            new_product = self.product_service.add_product(product)
+            return {
+                "id": new_product.id,
+                "name": new_product.name,
+                "description": new_product.description,
+                "price": new_product.price,
+                "stock_quantity": new_product.stock_quantity,
+                "brand": new_product.brand,
+                "weight": new_product.weight,
+                "dimension": new_product.dimension,
+                "color": new_product.color,
+            }, 201
+        except Exception as e:
+            return ({"error": str(e)}), 500
 
-#     try:
-#         database.session.add(new_product)
-#         database.session.commit()
-#         return jsonify ({
-#             "id": new_product.id,
-#             "name": new_product.name,
-#             "description": new_product.description,
-#             "price": new_product.price,
-#             "stock_quantity": new_product.stock_quantity,
-#             "brand": new_product.brand,
-#             "weight": new_product.weight,
-#             "dimension": new_product.dimension,
-#             "color": new_product.color
-#         }), 201
-#     except Exception as e:
-#         database.session.rollback()
-#         return jsonify({"error": str(e)}), 500
+    def delete_product(self, id: int):
+        product = self.product_service.delete_product_by_id(id=id)
 
-# @product_bp.route("/<int:id>", methods=["DELETE"])
-# def delete_product(id:int):
-#     product = Product.query.get(id)
-#     database.session.delete(product)
-#     database.session.commit()
-#     return("Product deleted successfully!")
+        if product is None:
+            return {"message": "Product not found."}, 404
+
+        return {"message": "Product deleted successfully"}, 204
