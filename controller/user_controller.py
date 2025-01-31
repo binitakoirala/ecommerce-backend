@@ -68,4 +68,4 @@ class UserController:
         if user is None:
             return {"message": "User not found."}, 404
 
-        return {"message": "User deleted successfully."}, 204
+        return "", 204

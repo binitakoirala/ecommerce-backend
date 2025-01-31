@@ -49,7 +49,7 @@ class ProductService:
 
         product: Product = Product.query.get(id)
 
-        if Product is None:
+        if product is None:
             return None
 
         Product.query.filter_by(id=id).delete()

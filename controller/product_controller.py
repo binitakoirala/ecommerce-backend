@@ -75,4 +75,4 @@ class ProductController:
         if product is None:
             return {"message": "Product not found."}, 404
 
-        return {"message": "Product deleted successfully"}, 204
+        return "", 204
